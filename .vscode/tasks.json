@@ -1,0 +1,23 @@
+{
+  // Keep-alive: keeps the Caldera Codespace awake WHILE you are actually working
+  // through the Caldera web UI port (8888). Clicking in that browser tab does NOT
+  // reset the Codespace idle timer (only terminal/editor activity does), so this
+  // task heartbeats to the terminal once a minute to stand in for that.
+  //
+  // The logic lives in scripts/keepalive.sh. A fresh Caldera Codespace usually has
+  // no 'ss', so the script's fallback time-bound (default 4 h) runs and keeps the
+  // box awake for the whole class. Tune via Codespaces variables KEEPALIVE_PORTS /
+  // KEEPALIVE_GRACE_MIN / KEEPALIVE_CAP_MIN, or remove this file to turn it off.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "keep-alive",
+      "type": "shell",
+      "command": "bash scripts/keepalive.sh",
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": { "reveal": "silent", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}
