@@ -1,0 +1,19 @@
+{
+  // CS460 Module 4 — pre-built Caldera (OT) Codespace.
+  // On creation this clones Caldera v5.3.0 + the caldera-ot modbus/dnp3 plugins,
+  // installs deps, enables the plugins, pre-builds the Vue UI, and installs the
+  // Tailscale binary. Students then just start the server and run the lab steps.
+  "name": "CS460 Caldera (OT)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+  },
+  // Real tun + NET_ADMIN so `sudo tailscale up` behaves like the turbine/farm.
+  "runArgs": ["--cap-add=NET_ADMIN", "--device=/dev/net/tun"],
+  "onCreateCommand": "bash .devcontainer/setup-caldera.sh",
+  "postStartCommand": "bash .devcontainer/post-start.sh",
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": { "label": "Caldera UI" }
+  }
+}
